@@ -9,8 +9,6 @@ WHERE CurrentFlag = 1
 GROUP BY JobTitle;
 
 
-
-
 /*Activity 2. Modify the query you created in Activity 1 so that the output shows only those job titles for which there is more than 1 employee.  */
 SELECT
 	JobTitle, 
@@ -19,9 +17,6 @@ FROM HumanResources.Employee
 WHERE CurrentFlag = 1
 GROUP BY JobTitle
 HAVING COUNT(BusinessEntityID) > 1;
-
-
-
 
 
 /*Activity 3. For each product, show its ProductID and Name (FROM the ProductionProduct table) and the location of its inventory (FROM the Product.Location table) and amount of inventory held at that location (FROM the Production.ProductInventory table).*/
@@ -46,7 +41,7 @@ SELECT
 	m.ProductModelID,
 	m.Name AS ModelName
 FROM Production.Product AS p
-	RIGHT OUTER JOIN Production.ProductModel AS m ON p.ProductID = m.ProductModelID
+	RIGHT OUTER JOIN Production.ProductModel AS m ON p.ProductModelID = m.ProductModelID
 WHERE p.ProductID IS NULL
 ORDER BY m.ProductModelID ASC;
 
