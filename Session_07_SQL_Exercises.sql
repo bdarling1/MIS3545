@@ -14,13 +14,12 @@ ORDER BY OrderDate;
 /*2, Display the total amount collected from selling the products, 774 and 777. */
 
 SELECT
-	d.ProductID,
-	ROUND(SUM(TotalDue), 2) AS ProductTotal
-FROM Sales.SalesOrderHeader AS h
-	JOIN Sales.SalesOrderDetail AS d ON h.SalesOrderID = d.SalesOrderID
-GROUP BY d.ProductID
-HAVING d.ProductID LIKE 774 OR d.ProductID LIKE 777
-ORDER BY d.ProductID;
+	ProductID,
+	SUM(LineTotal) AS ProductTotal
+FROM Sales.SalesOrderDetail 
+WHERE ProductID = 774 OR ProductID = 777
+GROUP BY ProductID
+ORDER BY ProductID;
 
 
 /*3, Write a query to display the sales person BusinessEntityID, last name and first name of all the sales persons and the name of the territory to which they belong.*/
@@ -62,19 +61,22 @@ FROM
 GROUP BY cc.CardType;
 
 /*5, Write a query to display ALL the country region codes along with their corresponding territory IDs*/
-/* tables: Sales.SalesTerritory*/
+/* tables: Sales.SalesTerritory, Person.CountryRegion*/
 
 SELECT
-	CountryRegionCode,
-	TerritoryID
-FROM Sales.SalesTerritory
+	CR.CountryRegionCode,
+	ST.TerritoryID
+FROM Person.CountryRegion AS CR
+	LEFT JOIN Sales.SalesTerritory AS ST
+	ON CR.CountryRegionCode = ST.CountryRegionCode
+ORDER BY CR.CountryRegionCode;
 
 
 /*6, Find out the average of the total dues of all the orders.*/
 
 SELECT 
 	AVG(TotalDue) AS AverageTotalDue
-FROM Sales.SalesOrderHeader
+FROM Sales.SalesOrderHeader;
 
 
 /*7, Write a query to report the sales order ID of those orders where the total due is greater than the average of the total dues of all the orders*/
