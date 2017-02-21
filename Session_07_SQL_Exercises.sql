@@ -25,14 +25,13 @@ ORDER BY ProductID;
 /*3, Write a query to display the sales person BusinessEntityID, last name and first name of all the sales persons and the name of the territory to which they belong.*/
 
 SELECT 
-	p.BusinessEntityID,
+	s.BusinessEntityID,
 	p.LastName,
 	p.FirstName,
 	t.Name AS TerritoryName
 FROM Person.Person AS p
 	JOIN Sales.SalesPerson AS s ON p.BusinessEntityID = s.BusinessEntityID
 	JOIN Sales.SalesTerritory AS t ON s.TerritoryID = t.TerritoryID
-WHERE p.PersonType LIKE 'SP'
 ORDER BY p.BusinessEntityID;
 
 
